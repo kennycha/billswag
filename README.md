@@ -47,7 +47,7 @@
     
     @require_GET
     def search(request, q):
-        API_URL = f'http://ws.audioscrobbler.com/2.0/?method=album.search&album={q}&api_key={API_KEY}&format=json'
+        API_URL = f'http://ws.audioscrobbler.com/2.0/?method=album.search&album={q}&api_key={API_KEY}&format=json&limit=5'
         data = requests.get(API_URL).json()
         return JsonResponse(data)
     ```
@@ -126,6 +126,30 @@
     import os
     
     LASTFM_API_KEY = os.environ.get('LASTFM_API_KEY')
+    ```
+  
+- CORS handling in Django
+
+  - `django-cors-headers` 활용
+
+  - https://github.com/adamchainz/django-cors-headers
+
+    ```python
+    # settings.py
+    
+    INSTALLED_APPS = [
+        ...
+        'corsheaders',
+        ...
+    ]
+    
+    MIDDLEWARE = [  # Or MIDDLEWARE_CLASSES on Django < 1.10
+        ...
+        'corsheaders.middleware.CorsMiddleware',
+        ...
+    ]
+    
+    CORS_ORIGIN_ALLOW_ALL = True
     ```
 
 ## Web App
