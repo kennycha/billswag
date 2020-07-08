@@ -17,25 +17,23 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'SearchBar',
   data() {
     return {
       searchInput: null,
-      albums: [],
     }
   },
+  computed: {
+    ...mapState(['albums'])
+  },
   methods: {
-    searchAlbum() {
-      axios.get(`https://billswag.herokuapp.com/api/${this.searchInput}/`)
-        // API SERVER에서 아래 내용만 넘겨주는 거로 바꿔야함
-        .then(res => {
-          this.albums = res.data.results.albummatches.album
-        })
-        .catch(err => console.error(err))
-    }
+    ...mapActions(['searchAlbums'])
+  },
+  created() {
+    this.searchAlbums()
   }
 }
 </script>

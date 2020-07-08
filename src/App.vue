@@ -2,7 +2,7 @@
   <div id="app">
     <h1>Bill Swag Clone</h1>
     <SearchBar />
-
+    
   </div>
 </template>
 
