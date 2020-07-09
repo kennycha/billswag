@@ -11,7 +11,10 @@
     />
     <ul v-if="isSearching && albums.length > 0" class="albums">
       <li v-for="album in albums" :key="album.url">
-        <div class="albums-item" @click="toggleIsSearching(false); clearInput(); clearAlbums();">
+        <div
+          class="albums-item"
+          @click="toggleIsSearching(false); clearInput(); clearAlbums(); selectAlbum(album.image[1]['#text']);"
+        >
           <img class="albums-item-image" :src="album.image[1]['#text']" />
           <div class="albums-item-info">
             <span>{{ album.name }}</span>
@@ -41,6 +44,7 @@ export default {
       'searchAlbums',
       'toggleIsSearching',
       'clearAlbums',
+      'selectAlbum',
     ]),
     clearInput() {
       this.searchInput = null;
@@ -60,7 +64,7 @@ li {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 100px;
+  top: 120px;
   z-index: 2;
   width: 100%;
 }
@@ -86,6 +90,7 @@ li {
 
 .albums-item:hover {
   background-color: #f7f1e3;
+  cursor: pointer;
 }
 
 .albums-item-info {

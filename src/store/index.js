@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     albums: [],
     isSearching: false,
+    selected: [],
   },
   getters: {},
   mutations: {
@@ -16,6 +17,11 @@ export default new Vuex.Store({
     },
     SET_SEARCHING(state, isSearching) {
       state.isSearching = isSearching;
+    },
+    SET_SELECTED(state, album) {
+      if (state.selected.length < 4) {
+        state.selected = [...state.selected, album];
+      }
     },
   },
   actions: {
@@ -27,6 +33,9 @@ export default new Vuex.Store({
           commit('SET_ALBUMS', res.data.results.albummatches.album);
         })
         .catch(err => console.error(err));
+    },
+    selectAlbum({ commit }, album) {
+      commit('SET_SELECTED', album);
     },
     clearAlbums({ commit }) {
       commit('SET_ALBUMS', []);

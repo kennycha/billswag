@@ -1,6 +1,11 @@
 <template>
   <div class="home">
     <h1 class="home-title">Bill Swag Clone</h1>
+    <ul>
+      <li v-for="select in selected" :key="select">
+        <img :src="select" alt="album cover" />
+      </li>
+    </ul>
     <img
       class="home-image"
       src="https://res.cloudinary.com/kennycld/image/upload/v1594291405/bill%20clone/lpimage_o6bmvn.png"
@@ -15,23 +20,25 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-  name: 'HomeView',
+  name: "HomeView",
+  computed: {
+    ...mapState(["selected"]),
+  },
 };
 </script>
 
 <style>
-.home {
-}
-
 .home-title {
-  font-size: 36px;
+  font-size: 48px;
   font-weight: 600;
   margin-bottom: 16px;
 }
 
 .home-image {
-  margin-top: 150px;
+  margin-top: 130px;
   width: 100%;
 }
 
@@ -43,6 +50,10 @@ export default {
   margin-top: 50px;
   width: 100%;
   padding: 15px 0;
+}
+
+.home-generator:hover {
+  cursor: pointer;
 }
 
 .home-footer {
