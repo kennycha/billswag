@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <input
-      @click="toggleIsSearching(true);"
+      @click="toggleIsSearching(true)"
       @keypress.enter="searchAlbums(searchInput)"
       v-model="searchInput"
       type="text"
@@ -13,7 +13,12 @@
       <li v-for="album in albums" :key="album.url">
         <div
           class="albums-item"
-          @click="toggleIsSearching(false); clearInput(); clearAlbums(); selectAlbum(album.image[1]['#text']);"
+          @click="
+            toggleIsSearching(false);
+            clearInput();
+            clearAlbums();
+            selectAlbum(album.image[2]['#text']);
+          "
         >
           <img class="albums-item-image" :src="album.image[1]['#text']" />
           <div class="albums-item-info">
@@ -27,24 +32,24 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions } from "vuex";
 
 export default {
-  name: 'SearchView',
+  name: "SearchView",
   data() {
     return {
       searchInput: null,
     };
   },
   computed: {
-    ...mapState(['albums', 'isSearching']),
+    ...mapState(["albums", "isSearching"]),
   },
   methods: {
     ...mapActions([
-      'searchAlbums',
-      'toggleIsSearching',
-      'clearAlbums',
-      'selectAlbum',
+      "searchAlbums",
+      "toggleIsSearching",
+      "clearAlbums",
+      "selectAlbum",
     ]),
     clearInput() {
       this.searchInput = null;
